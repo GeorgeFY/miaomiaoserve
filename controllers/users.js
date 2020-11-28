@@ -8,6 +8,7 @@ var login = async(req,res,next)=>{
 	})
 	if(result){
 		req.session.username = username
+		req.session.isAdmin = result.isAdmin
 		res.send({
 			msg:"登入成功",
 			status:0
@@ -100,7 +101,8 @@ var getUser = async(req,res,next)=>{
 			msg:"获取用户信息",
 			status:0,
 			data:{
-				username:req.session.username
+				username:req.session.username,
+				isAdmin:req.session.isAdmin
 			}
 		})
 	}else{
