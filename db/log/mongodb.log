@@ -1,0 +1,38 @@
+2020-11-26T05:16:45.217+0800 I CONTROL  [main] ***** SERVER RESTARTED *****
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] MongoDB starting : pid=5920 port=27017 dbpath=H:\vue-project\miaomiao\miaomiaoServe\db\data 64-bit host=GEORGE
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] db version v3.4.24
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] git version: 865b4f6a96d0f5425e39a18337105f33e8db504d
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] modules: none
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] build environment:
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten]     distmod: 2008plus
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2020-11-26T05:16:45.489+0800 I CONTROL  [initandlisten] options: { storage: { dbPath: "H:\vue-project\miaomiao\miaomiaoServe\db\data" }, systemLog: { destination: "file", logAppend: true, path: "H:\vue-project\miaomiao\miaomiaoServe\db\log\mongodb.log" } }
+2020-11-26T05:16:45.492+0800 E NETWORK  [initandlisten] listen(): bind() failed 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 for socket: 0.0.0.0:27017
+2020-11-26T05:16:45.492+0800 E NETWORK  [initandlisten] Failed to set up sockets during startup.
+2020-11-26T05:16:45.492+0800 E STORAGE  [initandlisten] Failed to set up listener: InternalError: Failed to set up sockets
+2020-11-26T05:16:45.492+0800 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2020-11-26T05:16:45.492+0800 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2020-11-26T05:16:45.492+0800 I CONTROL  [initandlisten] now exiting
+2020-11-26T05:16:45.492+0800 I CONTROL  [initandlisten] shutting down with code:48
+2020-11-26T05:23:09.296+0800 I CONTROL  [main] ***** SERVER RESTARTED *****
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] MongoDB starting : pid=10996 port=27017 dbpath=H:\vue-project\miaomiao\miaomiaoServe\db\data 64-bit host=GEORGE
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] db version v3.4.24
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] git version: 865b4f6a96d0f5425e39a18337105f33e8db504d
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] modules: none
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] build environment:
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten]     distmod: 2008plus
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] options: { storage: { dbPath: "H:\vue-project\miaomiao\miaomiaoServe\db\data" }, systemLog: { destination: "file", logAppend: true, path: "H:\vue-project\miaomiao\miaomiaoServe\db\log\mongodb.log" } }
+2020-11-26T05:23:09.559+0800 E NETWORK  [initandlisten] listen(): bind() failed 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 for socket: 0.0.0.0:27017
+2020-11-26T05:23:09.559+0800 E NETWORK  [initandlisten] Failed to set up sockets during startup.
+2020-11-26T05:23:09.559+0800 E STORAGE  [initandlisten] Failed to set up listener: InternalError: Failed to set up sockets
+2020-11-26T05:23:09.559+0800 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2020-11-26T05:23:09.559+0800 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] now exiting
+2020-11-26T05:23:09.559+0800 I CONTROL  [initandlisten] shutting down with code:48
