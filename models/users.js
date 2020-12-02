@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var {userHead} = require('../untils/config.js');
+var url = require('url');
 mongoose.set('useCreateIndex',true);
 
 var connect = mongoose.createConnection("mongodb://yuan:123456@localhost:27017/miaomiao",{
@@ -20,7 +22,9 @@ var UserSchema = new mongoose.Schema({
 	password : { type : String , required : true },
 	email : { type : String , required : true , index : { unique : true } },
 	date : { type : Date , default : Date.now() },
-	isAdmin:{type:Boolean,default:false}
+	isAdmin:{type:Boolean,default:false},
+	isFreeze:{type:Boolean,default:false},
+	HeadPic:{type:String,default:url.resolve(userHead.baseUrl,'default.jpg')}
 });
 
 var UserModel = connect.model('user' , UserSchema);
@@ -54,8 +58,46 @@ var updatePassword = (email,password)=>{
 				return false
 			})
 }
+var usersList = ()=>{
+	return UserModel.find()
+}
+var updateFreeze = (email,isFreeze)=>{
+	return UserModel.updateOne({email},{$set:{isFreeze}})
+			.then(()=>{
+				return true
+			})
+			.catch((err)=>{
+				console.log(err)
+				return false
+			})
+}
+
+var DeleteUser = (email)=>{
+	return UserModel.deleteOne({email})
+			.then(()=>{
+				return true
+			})
+			.catch((err)=>{
+				console.log(err)
+				return false
+			})
+}
+var updateUserHead = (username,HeadPic)=>{
+	return UserModel.updateOne({username},{$set:{HeadPic}})
+			.then(()=>{
+				return true
+			})
+			.catch((err)=>{
+				console.log(err)
+				return false
+			})
+}
 module.exports = {
 	save,
 	findLogin,
-	updatePassword
+	updatePassword,
+	usersList,
+	updateFreeze,
+	DeleteUser,
+	updateUserHead
 }

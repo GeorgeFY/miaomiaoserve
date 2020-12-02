@@ -37,7 +37,11 @@ var Email = {
 		return Date.now();
 	}
 }
+var userHead = {
+	baseUrl:'http://localhost:3000/uploads/'
+}
 module.exports = {
 	/* Mongoose, */
-	Email
+	Email,
+	userHead
 }

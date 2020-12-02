@@ -16,5 +16,7 @@ router.use((req,res,next)=>{
 })
 /* GET admin listing. */
 router.get('/', adminController.index);
-
+router.get('/usersList', adminController.usersLsit);
+router.post('/updateFreeze', adminController.updateFreeze);
+router.post('/deleteUser', adminController.deleteUser);
 module.exports = router;

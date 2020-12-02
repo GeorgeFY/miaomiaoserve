@@ -1,18 +1,39 @@
-var {Email} = require("../untils/config.js")
+var {Email,userHead} = require("../untils/config.js")
 var UserModel = require("../models/users.js")
+var fs =require('fs')
+var url = require('url')
+var { setCrypto,createVerify } = require('../untils/base.js')
 var login = async(req,res,next)=>{
-	var {username,password} = req.body;
+	var {username,password,verifyImg} = req.body;
+	//console.log(verifyImg)
+	//console.log(req.session.verifyImg)
+	if(verifyImg !== req.session.verifyImg){
+		res.send({
+			msg:"验证码验证失败",
+			status:-3
+		})
+		return
+	}
 	var result = await UserModel.findLogin({
 		username,
-		password
+		password:setCrypto(password)
 	})
 	if(result){
 		req.session.username = username
 		req.session.isAdmin = result.isAdmin
-		res.send({
-			msg:"登入成功",
-			status:0
-		})
+		req.session.HeadPic = result.HeadPic 
+		if(result.isFreeze){
+			res.send({
+				msg:"账号已冻结",
+				status:-2
+			})
+		}else{
+			res.send({
+				msg:"登入成功",
+				status:0
+			})
+		}
+		
 	}else{
 		res.send({
 			msg:"登入失败",
@@ -35,9 +56,16 @@ var register = async(req,res,next)=>{
 		});
 		return;
 	}
+	if((Email.time - req.session.time)/1000 > 60){
+		res.send({
+			msg:"验证码已过期",
+			status:-3
+		})
+		return;
+	}
 	var result = await UserModel.save({
 		username,
-		password,
+		password: setCrypto(password),
 		email
 	})
 	console.log("yuan result",result)
@@ -64,6 +92,8 @@ var verify = async(req,res,next)=>{
 	
 	req.session.verify = verify;
 	req.session.email = email;
+	req.session.time = Email.time;
+	
 	console.log("req.session.verify",req.session.verify)
 	console.log("req.session.email",req.session.email)
 	
@@ -102,7 +132,8 @@ var getUser = async(req,res,next)=>{
 			status:0,
 			data:{
 				username:req.session.username,
-				isAdmin:req.session.isAdmin
+				isAdmin:req.session.isAdmin,
+				HeadPic :req.session.HeadPic
 			}
 		})
 	}else{
@@ -116,7 +147,7 @@ var getUser = async(req,res,next)=>{
 var findPassword = async(req,res,next)=>{
 	var {email,password,verify} = req.body;
 	if(email === req.session.email && verify === req.session.verify){
-		var result = UserModel.updatePassword(email,password)
+		var result = UserModel.updatePassword(email,setCrypto(password))
 		if(result){
 			res.send({
 				msg:"密码修改成功",
@@ -137,11 +168,47 @@ var findPassword = async(req,res,next)=>{
 	
 }
 
+var verifyImg = async(req,res,next)=>{
+	var result = await createVerify(req,res);
+	if(result){
+		res.send(result)
+		console.log(result,"yuanfang")
+	}
+}
+
+var uploadUserHead = async(req,res,next)=>{
+	//console.log(req.file);
+	await fs.rename('public/uploads/' + req.file.filename,'public/uploads/' +req.session.username +'.jpg',err=>{
+		if(err){
+			console.log('重命名失败',err);
+		}else{
+			console.log('重命名成功');
+		}
+	})
+	var result = await UserModel.updateUserHead(req.session.username,url.resolve(userHead.baseUrl,req.session.username + '.jpg'))
+	if(result){
+		res.send({
+			msg:'头像上传成功',
+			status:0,
+			data:{
+				HeadPic:url.resolve(userHead.baseUrl,req.session.username + '.jpg')
+			}
+		})
+	}else{
+		res.send({
+			msg:'头像上传失败',
+			status:-1
+		})
+	}
+}
+
 module.exports = {
 	login,
 	register,
 	verify,
 	logout,
 	getUser,
-	findPassword
+	findPassword,
+	verifyImg,
+	uploadUserHead
 }
